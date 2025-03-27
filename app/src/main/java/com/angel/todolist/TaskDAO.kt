@@ -1,5 +1,6 @@
 package com.angel.todolist
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.util.Log
@@ -108,6 +109,7 @@ class TaskDAO(context: Context) {
             return task
         }
 
+        @SuppressLint("Recycle")
         fun findAll(): List<Task> {
             val db = databaseManager.readableDatabase
 
