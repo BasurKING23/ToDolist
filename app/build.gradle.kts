@@ -32,6 +32,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
+
+    }
+    // agregados
+
+    buildFeatures{
+        viewBinding = true
     }
 }
 
@@ -49,4 +55,5 @@ dependencies {
     // agregados por mi
 
     implementation (libs.androidx.recyclerview)
+
 }

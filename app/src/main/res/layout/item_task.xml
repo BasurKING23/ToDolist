@@ -7,13 +7,13 @@
     android:layout_height="match_parent">
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/doneCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"/>
 
     <TextView
-        android:id="@+id/task"
+        android:id="@+id/titleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView"
@@ -21,9 +21,11 @@
         android:layout_marginStart="6dp"/>
     <Button
         android:id="@+id/deletebutton"
+        style="?attr/materialIconButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:icon="@drawable/ic_delete"
-        android:gravity="center"/>
+        android:gravity="center"
+        app:iconTint="#BF0F0F"/>
 
 </LinearLayout>

@@ -3,7 +3,7 @@ package com.angel.todolist.data
 class Task (
     var id: Long,
     var title: String,
-    var done: Boolean
+    var done: Boolean = false
 
 
 ) {
