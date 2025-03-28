@@ -1,4 +1,4 @@
-package com.angel.todolist
+package com.angel.todolist.data
 
 class Task (
     var id: Long,

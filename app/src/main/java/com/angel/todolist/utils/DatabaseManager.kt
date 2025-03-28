@@ -1,8 +1,9 @@
-package com.angel.todolist
+package com.angel.todolist.utils
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.angel.todolist.data.Task
 
 class DatabaseManager (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,null, DATABASE_VERSION) {
 

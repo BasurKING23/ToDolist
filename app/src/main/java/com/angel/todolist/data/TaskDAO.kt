@@ -1,10 +1,10 @@
-package com.angel.todolist
+package com.angel.todolist.data
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.util.Log
-import androidx.core.app.TaskStackBuilder
+import com.angel.todolist.utils.DatabaseManager
 
 class TaskDAO(context: Context) {
 
