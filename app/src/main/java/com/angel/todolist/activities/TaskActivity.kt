@@ -21,7 +21,7 @@ class TaskActivity : AppCompatActivity() {
 
     lateinit var taskDAO: TaskDAO
 
-
+        //creacion de hint variable
     val hintList = listOf(
         "Comprar leche",
         "Apartar mesa de ping pong",
@@ -29,6 +29,7 @@ class TaskActivity : AppCompatActivity() {
         "Llevar a la niña en cola",
         "Ir a las tapas"
     )
+    //creacion de hint variable
 
     @SuppressLint("WrongViewCast", "CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,7 +56,7 @@ class TaskActivity : AppCompatActivity() {
         taskDAO = TaskDAO(this)
 
 
-
+        // boton de guardar
         binding.saveButton.setOnClickListener {
             val title = binding.titleEditText.text.toString()
 
@@ -65,10 +66,14 @@ class TaskActivity : AppCompatActivity() {
 
             finish()
         }
+        // boton de guardar
     }
+
+    //boton de retroceso con la appbar
     override fun onSupportNavigateUp(): Boolean {
         onBackPressedDispatcher.onBackPressed()
         return true
         }
+    //boton de retroceso con la appbar
 
 }

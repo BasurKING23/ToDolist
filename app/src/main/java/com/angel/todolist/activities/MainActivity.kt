@@ -24,10 +24,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -36,16 +35,29 @@ class MainActivity : AppCompatActivity() {
 
         taskDAO = TaskDAO(this)
 
+
+        //editar tarea
         adapter = TaskAdapter(emptyList()) {
 
+            val task = taskList[it]
+
+            intent.putExtra("TASK_ID", task.id)
+
         }
+        //editar tarea
+
+
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
+
+        //boton de añadir
         binding.addtaskbutton.setOnClickListener {
             val intent = Intent(this, TaskActivity::class.java)
             startActivity(intent)
+
         }
+        //boton de añadir
     }
 
     override fun onResume() {
@@ -56,5 +68,4 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-
 }

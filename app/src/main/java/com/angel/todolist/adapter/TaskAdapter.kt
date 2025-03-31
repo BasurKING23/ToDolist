@@ -14,9 +14,11 @@ class TaskAdapter(var items: List<Task>, val onClick: (Int) -> Unit) : Adapter<T
         val binding = ItemTaskBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return TaskViewHolder(binding)
     }
-
+    // cuenta cuantos item tengo
     override fun getItemCount(): Int = items.size
+    // fin de cuenta
 
+    // muestra la vista del recicler view
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val task = items[position]
         holder.render(task)
@@ -24,11 +26,15 @@ class TaskAdapter(var items: List<Task>, val onClick: (Int) -> Unit) : Adapter<T
             onClick(position)
         }
     }
+    // fin de  muestra la vista del recicler view
 
+
+    //actualizacion de datos en la lista
     fun updateItems(items: List<Task>) {
         this.items = items
         notifyDataSetChanged()
     }
+    // fin de actualizacion de la lista
 }
 
 class TaskViewHolder(val binding: ItemTaskBinding) : ViewHolder(binding.root) {

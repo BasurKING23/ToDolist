@@ -18,7 +18,8 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         android:layout_weight="1"
-        android:layout_marginStart="6dp"/>
+        android:layout_marginStart="6dp"
+        android:textSize="16dp"/>
     <Button
         android:id="@+id/deletebutton"
         style="?attr/materialIconButtonStyle"
