@@ -8,7 +8,11 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.angel.todolist.data.Task
 import com.angel.todolist.databinding.ItemTaskBinding
 
-class TaskAdapter(var items: List<Task>, val onClick: (Int) -> Unit) : Adapter<TaskViewHolder>() {
+class TaskAdapter(var items: List<Task>,
+                  val onClick: (Int) -> Unit,
+                  var items: List<Task>,
+                  val onDelete: (Int) -> Unit
+): Adapter<TaskViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val binding = ItemTaskBinding.inflate(LayoutInflater.from(parent.context), parent, false)

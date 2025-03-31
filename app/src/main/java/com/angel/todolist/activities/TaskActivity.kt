@@ -17,9 +17,14 @@ import com.angel.todolist.databinding.ActivityTaskBinding
 
 class TaskActivity : AppCompatActivity() {
 
+    companion object {
+        const val TASK_ID = "TASK_ID"
+    }
+
     lateinit var binding: ActivityTaskBinding
 
     lateinit var taskDAO: TaskDAO
+    lateinit var task: Task
 
         //creacion de hint variable
     val hintList = listOf(
@@ -31,7 +36,6 @@ class TaskActivity : AppCompatActivity() {
     )
     //creacion de hint variable
 
-    @SuppressLint("WrongViewCast", "CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -45,15 +49,19 @@ class TaskActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        val autoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.titleEditText)
-        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, listOf("Opción 1", "Opción 2", "Opción 3"))
-        autoCompleteTextView.setAdapter(adapter)
-
-
+        //ramdon hint
         binding.titleEditText.hint = hintList.random()
+        // fin de ramdon hint
+        val id = intent.getLongExtra(TASK_ID, -1L)
 
         taskDAO = TaskDAO(this)
+
+        if (id != -1L) {
+            task = taskDAO.findById(id)!!
+            binding.titleEditText.setText(task.title)
+        } else {
+            task = Task(-1L, "")
+        }
 
 
         // boton de guardar
@@ -67,6 +75,23 @@ class TaskActivity : AppCompatActivity() {
             finish()
         }
         // boton de guardar
+
+        //bototon de editar y guardar
+        binding.saveButton.setOnClickListener {
+            val title = binding.titleEditText.text.toString()
+
+            task.title = title
+
+            if (task.id != -1L) {
+                taskDAO.update(task)
+            } else {
+                taskDAO.insert(task)
+            }
+
+            finish()
+        }
+        //botn de editar y guardar
+
     }
 
     //boton de retroceso con la appbar
