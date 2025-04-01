@@ -1,17 +1,18 @@
 package com.angel.todolist.adapter
 
-
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.angel.todolist.data.Task
 import com.angel.todolist.databinding.ItemTaskBinding
+import com.angel.todolist.utils.addStrikethrough
 
 class TaskAdapter(var items: List<Task>,
                   val onClick: (Int) -> Unit,
-                  var items: List<Task>,
-                  val onDelete: (Int) -> Unit
+                  val onDelete: (Int) -> Unit,
+                  val onCheck: (Int) -> Unit
 ): Adapter<TaskViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
@@ -29,6 +30,15 @@ class TaskAdapter(var items: List<Task>,
         holder.itemView.setOnClickListener {
             onClick(position)
         }
+        holder.binding.deletebutton.setOnClickListener {
+            onDelete(position)
+        }
+        holder.binding.doneCheckBox.setOnCheckedChangeListener { _, _ ->
+        onCheck(position)
+            if (holder.binding.doneCheckBox.isPressed) {
+                onCheck(position)
+            }
+        }
     }
     // fin de  muestra la vista del recicler view
 
@@ -41,10 +51,15 @@ class TaskAdapter(var items: List<Task>,
     // fin de actualizacion de la lista
 }
 
+
 class TaskViewHolder(val binding: ItemTaskBinding) : ViewHolder(binding.root) {
 
     fun render(task: Task) {
-        binding.titleTextView.text = task.title
+        if (task.done) {
+            binding.titleTextView.text = task.title.addStrikethrough()
+        } else {
+            binding.titleTextView.text = task.title
+        }
         binding.doneCheckBox.isChecked = task.done
     }
 }

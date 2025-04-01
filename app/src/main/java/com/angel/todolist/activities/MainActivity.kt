@@ -2,6 +2,7 @@ package com.angel.todolist.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -36,8 +37,9 @@ class MainActivity : AppCompatActivity() {
 
         taskDAO = TaskDAO(this)
         //editar tarea
-            adapter = TaskAdapter(emptyList(), ::editTask, ::deleteTask)
+            adapter = TaskAdapter(emptyList(), ::editTask, ::deleteTask, ::checkTask)
             binding.recyclerView.adapter = adapter
+
             binding.recyclerView.layoutManager = LinearLayoutManager(this)
         //editar tarea
 
@@ -60,6 +62,19 @@ class MainActivity : AppCompatActivity() {
     fun refreshData() {
         taskList = taskDAO.findAll()
         adapter.updateItems(taskList)
+
+        if (taskList.isEmpty()) {
+            binding.TaskEmpty.visibility = View.VISIBLE
+        } else {
+            binding.TaskEmpty.visibility = View.GONE
+        }
+    }
+    fun checkTask(position: Int) {
+        val task = taskList[position]
+
+        task.done = !task.done
+        taskDAO.update(task)
+        refreshData()
     }
     fun editTask (position: Int) {
         val task = taskList [position]

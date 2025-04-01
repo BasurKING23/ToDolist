@@ -1,10 +1,6 @@
 package com.angel.todolist.activities
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -89,16 +85,15 @@ class TaskActivity : AppCompatActivity() {
             }
 
             finish()
+            //botn de editar y guardar
         }
-        //botn de editar y guardar
-
     }
 
     //boton de retroceso con la appbar
     override fun onSupportNavigateUp(): Boolean {
         onBackPressedDispatcher.onBackPressed()
         return true
-        }
+    }
     //boton de retroceso con la appbar
 
 }
