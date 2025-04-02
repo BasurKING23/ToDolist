@@ -20,6 +20,8 @@ class DatabaseManager (context: Context) : SQLiteOpenHelper(context, DATABASE_NA
         private const val SQL_DROP_TABLE_TASK = "DROP TABLE IF EXISTS ${Task.TABLE_NAME}"
     }
 
+
+
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(SQL_CREATE_TABLE_TASK)
     }
