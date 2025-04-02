@@ -78,6 +78,7 @@ class MainActivity : AppCompatActivity() {
     }
     fun editTask (position: Int) {
         val task = taskList [position]
+
         val intent = Intent(this, TaskActivity::class.java)
         intent.putExtra(TaskActivity.TASK_ID,task.id)
         startActivity(intent)

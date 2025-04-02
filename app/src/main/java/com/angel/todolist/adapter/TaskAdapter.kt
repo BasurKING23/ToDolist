@@ -34,7 +34,6 @@ class TaskAdapter(var items: List<Task>,
             onDelete(position)
         }
         holder.binding.doneCheckBox.setOnCheckedChangeListener { _, _ ->
-        onCheck(position)
             if (holder.binding.doneCheckBox.isPressed) {
                 onCheck(position)
             }
