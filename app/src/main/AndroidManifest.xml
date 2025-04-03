@@ -13,6 +13,12 @@
         android:theme="@style/Theme.ToDolist"
         tools:targetApi="31">
         <activity
+            android:name=".activities.TaskListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.CategoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.TaskActivity"
             android:theme="@style/Theme.Material3.DayNight"
             android:exported="false" />

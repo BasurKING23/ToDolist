@@ -79,6 +79,17 @@ class MainActivity : AppCompatActivity() {
             binding.CategoryEmpty.visibility = View.GONE  // se oculta el mensaje de que no hay categorias
         }
     }
+
+    fun showCategory(position: Int) {
+        val category = categoryList[position]
+
+        val intent = Intent(this, TaskListActivity::class.java)
+        intent.putExtra(TaskListActivity.CATEGORY_ID, category.id)
+        startActivity(intent)
+    }
+
+
+
     fun editCategory (position: Int) {
         val category = categoryList [position]
 

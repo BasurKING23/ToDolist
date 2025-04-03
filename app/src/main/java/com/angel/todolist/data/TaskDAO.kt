@@ -10,6 +10,8 @@ class TaskDAO(context: Context) {
 
     val databaseManager = DatabaseManager(context)
 
+    val categoryDAO = CategoryDAO(context)
+
     fun insert(task: Task) {                                        //se crea la funcion para insertar una tarea en la base de datos
         val db = databaseManager.writableDatabase
 
@@ -97,8 +99,6 @@ class TaskDAO(context: Context) {
                     cursor.getString(cursor.getColumnIndexOrThrow(Task.COLUMN_NAME_TITLE))
                 val done =
                     cursor.getInt(cursor.getColumnIndexOrThrow(Task.COLUMN_NAME_DONE)) != 0
-
-                task = Task(id, title, done)
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -107,6 +107,50 @@ class TaskDAO(context: Context) {
         }
 
         return task
+    }
+
+
+
+    fun findAll(): List<Task> {
+        val db = databaseManager.readableDatabase
+
+        val projection = arrayOf(
+            Task.COLUMN_NAME_ID,
+            Task.COLUMN_NAME_TITLE,
+            Task.COLUMN_NAME_DONE,
+            Task.COLUMN_NAME_CATEGORY
+        )
+
+        var taskList: MutableList<Task> = mutableListOf()
+
+        try {
+            val cursor = db.query(
+                Task.TABLE_NAME,   // The table to query
+                projection,             // The array of columns to return (pass null to get all)
+                null,              // The columns for the WHERE clause
+                null,          // The values for the WHERE clause
+                null,                   // don't group the rows
+                null,                   // don't filter by row groups
+                Task.COLUMN_NAME_DONE               // The sort order
+            )
+
+            while (cursor.moveToNext()) {
+                val id = cursor.getLong(cursor.getColumnIndexOrThrow(Task.COLUMN_NAME_ID))
+                val title = cursor.getString(cursor.getColumnIndexOrThrow(Task.COLUMN_NAME_TITLE))
+                val done = cursor.getInt(cursor.getColumnIndexOrThrow(Task.COLUMN_NAME_DONE)) != 0
+                val categoryId = cursor.getLong(cursor.getColumnIndexOrThrow(Task.COLUMN_NAME_CATEGORY))
+                val category = categoryDAO.findById(categoryId)!!
+                val task = Task(id, title, done, category)
+
+                taskList.add(task)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        } finally {
+            db.close()
+        }
+
+        return taskList
     }
 
     fun findAllByCategory(category: Category): List<Task> {
@@ -120,17 +164,18 @@ class TaskDAO(context: Context) {
         )
 
         val selection = "${Task.COLUMN_NAME_CATEGORY} = ${category.id}"
+
         var taskList: MutableList<Task> = mutableListOf()
 
         try {
             val cursor = db.query(
-                Task.TABLE_NAME,
-                projection,
-                null,
-                null,
-                null,
-                null,
-                Task.COLUMN_NAME_DONE
+                Task.TABLE_NAME,   // The table to query
+                projection,             // The array of columns to return (pass null to get all)
+                selection,              // The columns for the WHERE clause
+                null,          // The values for the WHERE clause
+                null,                   // don't group the rows
+                null,                   // don't filter by row groups
+                Task.COLUMN_NAME_DONE               // The sort order
             )
 
             while (cursor.moveToNext()) {

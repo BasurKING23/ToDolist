@@ -68,24 +68,10 @@ class TaskActivity : AppCompatActivity() {
             task = taskDAO.findById(id)!!                               //se obtiene la tarea de la base de datos si existe o se crea una nueva tarea si no existe
             binding.titleEditText.setText(task.title)                   //se obtiene el titulo de la tarea si existe o se crea una nueva tarea si no existe
         } else {
-            task = Task(-1L, "")                                //se crea una nueva tarea si no existe o se obtiene la tarea de la base de datos si existe
+            task = Task(-1L, "", false, category)                                //se crea una nueva tarea si no existe o se obtiene la tarea de la base de datos si existe
             supportActionBar?.title = "Crear tarea"
         }
 
-        // boton de guardar
-
-
-        binding.saveButton.setOnClickListener {
-
-            val title = binding.titleEditText.text.toString()
-
-            val task = Task(-1L,title, false)
-
-            taskDAO.insert(task)
-
-            finish()
-        }
-        // boton de guardar
 
         // boton de editar y guardar con la appbar y la base de datos para  verificar el ID
         binding.saveButton.setOnClickListener {

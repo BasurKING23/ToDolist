@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.angel.todolist.data.Category
 import com.angel.todolist.databinding.ItemCategoryBinding
-import com.angel.todolist.utils.addStrikethrough
 
 class CategoryAdapter(
     var items: List<Category>,

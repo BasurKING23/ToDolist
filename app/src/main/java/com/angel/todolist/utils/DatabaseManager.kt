@@ -10,7 +10,7 @@ class DatabaseManager (context: Context) : SQLiteOpenHelper(context, DATABASE_NA
 
     companion object {
         const val DATABASE_NAME = "reminders.db"
-        const val DATABASE_VERSION = 1
+        const val DATABASE_VERSION = 3
 
         private const val SQL_CREATE_TABLE_TASK =
             //se crea la tabla
