@@ -9,10 +9,11 @@ import com.angel.todolist.data.Task
 import com.angel.todolist.databinding.ItemTaskBinding
 import com.angel.todolist.utils.addStrikethrough
 
-class TaskAdapter(var items: List<Task>,
-                  val onClick: (Int) -> Unit,
-                  val onDelete: (Int) -> Unit,
-                  val onCheck: (Int) -> Unit
+class TaskAdapter(
+    var items: List<Task>,
+    val onClick: (Int) -> Unit,
+    val onDelete: (Int) -> Unit,
+    val onCheck: (Int) -> Unit
 ): Adapter<TaskViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {

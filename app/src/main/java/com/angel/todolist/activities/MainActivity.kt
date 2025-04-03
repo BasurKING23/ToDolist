@@ -10,22 +10,26 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.angel.todolist.R
-import com.angel.todolist.adapter.TaskAdapter
-import com.angel.todolist.data.Task
-import com.angel.todolist.data.TaskDAO
+import com.angel.todolist.adapter.CategoryAdapter
+import com.angel.todolist.data.Category
+import com.angel.todolist.data.CategoryDAO
 import com.angel.todolist.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityMainBinding
-    lateinit var taskDAO: TaskDAO
-    lateinit var taskList: List<Task>
+    lateinit var binding: ActivityMainBinding //se crea el binding para la vista de la actividad
 
-    lateinit var adapter: TaskAdapter
+    lateinit var categoryDAO: CategoryDAO //se crea el DAO para la tabla de categorias
+    lateinit var categoryList: List<Category> //se crea la lista de categorias
+    lateinit var adapter: CategoryAdapter //se crea el adapter para la lista de categorias
+
+//    lateinit var categoryDAO: CategoryDAO
+//    lateinit var categoryList: List<Category>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         //setContentView(R.layout.activity_main)
@@ -35,22 +39,28 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        taskDAO = TaskDAO(this)
+        categoryDAO = CategoryDAO(this)     //se crea el DAO para la tabla de categorias y se crea la lista de categorias
+
+        supportActionBar?.title = "Mis categorias" //se cambia el titulo de la actividad
+
         //editar tarea
-            adapter = TaskAdapter(emptyList(), ::editTask, ::deleteTask, ::checkTask)
-            binding.recyclerView.adapter = adapter
+            adapter = CategoryAdapter(emptyList(), ::showCategory, ::editCategory, ::deleteCategory)
+
+            binding.recyclerView.adapter = adapter   //se crea el adapter para la lista de categorias
 
             binding.recyclerView.layoutManager = LinearLayoutManager(this)
         //editar tarea
 
 
-        //boton de añadir
-        binding.addtaskbutton.setOnClickListener {
-            val intent = Intent(this, TaskActivity::class.java)
-            startActivity(intent)
+        // boton de añadir categoria
 
+
+        binding.addCategoryButton.setOnClickListener {
+            val intent = Intent(this, CategoryActivity::class.java)
+            startActivity(intent)
         }
-        //boton de añadir
+        // boton de añadir categoria
+
     }
 
     override fun onResume() {
@@ -60,37 +70,30 @@ class MainActivity : AppCompatActivity() {
 
     }
     fun refreshData() {
-        taskList = taskDAO.findAll()
-        adapter.updateItems(taskList)
+        categoryList = categoryDAO.findAll()
+        adapter.updateItems(categoryList)
 
-        if (taskList.isEmpty()) {
-            binding.TaskEmpty.visibility = View.VISIBLE
+        if (categoryList.isEmpty()) {
+            binding.CategoryEmpty.visibility = View.VISIBLE     //se muestra el mensaje de que no hay categorias
         } else {
-            binding.TaskEmpty.visibility = View.GONE
+            binding.CategoryEmpty.visibility = View.GONE  // se oculta el mensaje de que no hay categorias
         }
     }
-    fun checkTask(position: Int) {
-        val task = taskList[position]
+    fun editCategory (position: Int) {
+        val category = categoryList [position]
 
-        task.done = !task.done
-        taskDAO.update(task)
-        refreshData()
-    }
-    fun editTask (position: Int) {
-        val task = taskList [position]
-
-        val intent = Intent(this, TaskActivity::class.java)
-        intent.putExtra(TaskActivity.TASK_ID,task.id)
+        val intent = Intent(this, CategoryActivity::class.java)
+        intent.putExtra(CategoryActivity.CATEGORY_ID,category.id)
         startActivity(intent)
     }
-    fun deleteTask (position: Int) {
-        val task = taskList[position]
+    fun deleteCategory (position: Int) {
+        val category = categoryList[position]
 
         AlertDialog.Builder(this)
-            .setTitle("Delete task")
-            .setMessage("Are you sure you want to delete this task?")
+            .setTitle("Delete category")
+            .setMessage("Are you sure you want to delete this category?")
             .setPositiveButton(android.R.string.ok) { _, _ ->
-                taskDAO.delete(task)
+                categoryDAO.delete(category)
                 refreshData()
             }
             .setNegativeButton(android.R.string.cancel, null)
