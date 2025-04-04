@@ -65,4 +65,8 @@ class CategoryActivity: AppCompatActivity() {       //se crea la actividad para 
             finish()
         }
     }
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return true
+    }
 }

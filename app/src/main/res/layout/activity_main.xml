@@ -37,7 +37,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="No hay ninguna tarea pendiente" />
+        android:text="No hay ninguna Categoria pendiente" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

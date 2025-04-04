@@ -13,9 +13,11 @@
         android:theme="@style/Theme.ToDolist"
         tools:targetApi="31">
         <activity
+            android:theme="@style/Theme.Material3.DayNight"
             android:name=".activities.TaskListActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/Theme.Material3.DayNight"
             android:name=".activities.CategoryActivity"
             android:exported="false" />
         <activity

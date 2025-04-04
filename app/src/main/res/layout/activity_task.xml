@@ -9,13 +9,6 @@
     android:orientation="vertical"
     tools:context=".activities.TaskActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tarea a realizar:"
-        android:textSize="22sp"
-        android:padding="3dp"/>
-
     <AutoCompleteTextView
         android:id="@+id/titleEditText"
         android:layout_width="match_parent"

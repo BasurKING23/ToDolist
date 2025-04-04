@@ -25,4 +25,18 @@
         app:srcCompat="@drawable/ic_add"
         android:layout_margin="16dp"/>
 
+    <TextView
+        android:id="@+id/taskEmpty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="No hay ninguna tarea en esta categoria pendiente"/>
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
