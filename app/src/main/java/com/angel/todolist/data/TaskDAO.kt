@@ -18,6 +18,7 @@ class TaskDAO(context: Context) {
         val values = ContentValues().apply {                            //se crea un objeto ContentValues para almacenar los valores de la tarea
             put(Task.COLUMN_NAME_TITLE, task.title)
             put(Task.COLUMN_NAME_DONE, task.done)
+            put(Task.COLUMN_NAME_CATEGORY, task.category.id)                //se obtiene el id de la categoria de la tarea y se almacena en la base de datos
         }
 
         try {
@@ -38,6 +39,7 @@ class TaskDAO(context: Context) {
         val values = ContentValues().apply {                            // se crea un objeto ContentValues para almacenar los valores de la tarea
             put(Task.COLUMN_NAME_TITLE, task.title)
             put(Task.COLUMN_NAME_DONE, task.done)
+            put(Task.COLUMN_NAME_CATEGORY, task.category.id)            // se obtiene el id de la categoria de la tarea y se almacena en la base de datos
         }
 
         try {
